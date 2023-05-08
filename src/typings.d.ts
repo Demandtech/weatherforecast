@@ -6,6 +6,7 @@ export interface State {
   userLocation: Location
   current: Current
   getData: (query: string) => void
+  closeModal: ()=>void
 }
 
 interface Current {
@@ -114,5 +115,9 @@ interface Set_Error {
   }
 }
 
-export type Action = Get_data | Start_Loading | Stop_Loading | Set_Error
+interface Close_Modal {
+  type: 'CLOSE_MODAL'
+}
+
+export type Action = Get_data | Start_Loading | Stop_Loading | Set_Error | Close_Modal
 

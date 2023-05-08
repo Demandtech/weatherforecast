@@ -9,5 +9,6 @@ import Aside from './Aside'
 import MainComponent from './MainComponent'
 import MainContent from './MainContent'
 import Loader from './Loader'
+import ErrorModal from './ErroModal'
 
-export { AirQuality, Greeting, Header, Hour, Moonrise, Sunrise, Days, Aside, MainComponent, MainContent, Loader }
+export { AirQuality, Greeting, Header, Hour, Moonrise, Sunrise, Days, Aside, MainComponent, MainContent, Loader, ErrorModal }

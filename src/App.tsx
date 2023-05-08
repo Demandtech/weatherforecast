@@ -1,4 +1,4 @@
-import {Header, MainComponent, Aside} from './components'
+import {Header, MainComponent, Aside, ErrorModal} from './components'
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
         <MainComponent />
       </section>
       <Aside />
+      <ErrorModal />
     </main>
   )
 }

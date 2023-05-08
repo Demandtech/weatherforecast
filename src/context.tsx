@@ -24,6 +24,7 @@ const initialState: State = {
     region: '',
   },
   getData: () => Promise.resolve(),
+  closeModal: () => Function
 }
 
 export const AppContext = createContext<State>(initialState)
@@ -52,12 +53,15 @@ export const AppProvider = ({ children }: AppProviderType) => {
     }
   }
 
+  const closeModal = () => {
+    dispatch({ type: 'CLOSE_MODAL' })
+  }
+
   const fetchDataApi = (url: string) => {
     dispatch({ type: 'START_LOADING' })
     const data = fetch(url)
       .then((request) => request.json())
       .then((response) => {
-        console.log(response)
         if (response.error) {
           dispatch({
             type: 'SET_ERROR',
@@ -86,10 +90,16 @@ export const AppProvider = ({ children }: AppProviderType) => {
     return data
   }
 
+  useEffect(() => {
+    const modalTimeoutId = setTimeout(() => {
+      closeModal()
+    }, 5000)
+
+    return () => clearTimeout(modalTimeoutId)
+  }, [state.error])
+
   const getData = (querystr: string) => {
     if (querystr) {
-      console.log(querystr)
-
       const url = `${baseUrl}${method}?key=${apiKey}&q=${querystr}&aqi=yes&days=6`
       fetchDataApi(url)
     } else {
@@ -100,7 +110,6 @@ export const AppProvider = ({ children }: AppProviderType) => {
             const lati_long = latitude + ',' + longitude
             if (lati_long) {
               const url = `${baseUrl}${method}?key=${apiKey}&q=${lati_long}&aqi=yes&days=6`
-              console.log(url)
               fetchDataApi(url)
             }
           },
@@ -122,7 +131,7 @@ export const AppProvider = ({ children }: AppProviderType) => {
   }, [locationPermision])
 
   return (
-    <AppContext.Provider value={{ ...state, getData }}>
+    <AppContext.Provider value={{ ...state, getData, closeModal }}>
       {children}
     </AppContext.Provider>
   )

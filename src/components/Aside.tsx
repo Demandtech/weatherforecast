@@ -40,6 +40,7 @@ const Aside = () => {
               className={`relative mb-4 `}
               onSubmit={(e) => {
                 e.preventDefault()
+                setQuery('')
                 getData(query.trim())
               }}
             >

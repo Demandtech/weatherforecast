@@ -4,10 +4,10 @@ const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'GET_DATA': {
       
-      const temptDays = action.payload.forecast.forecastday
-      const temptLocationName = action.payload.location.name
-      const temptLocationRegion = action.payload.location.region
-      const temptCurrent = action.payload.current
+      const temptDays = action.payload?.forecast?.forecastday
+      const temptLocationName = action?.payload.location?.name
+      const temptLocationRegion = action?.payload.location?.region
+      const temptCurrent = action.payload?.current
 
       return {
         ...state,

@@ -2,10 +2,9 @@ import { createContext, useReducer, useEffect, useState } from 'react'
 import reducer from './reducer'
 import { State, AppProviderType, Action } from './typings'
 
-
 const initialState: State = {
   isLoading: false,
-  error: {show:false, msg: ''},
+  error: { show: false, msg: '' },
   days: [],
   current: {
     humidity: 0,
@@ -33,9 +32,6 @@ const apiKey = import.meta.env.VITE_APP_API_KEY
 const baseUrl = import.meta.env.VITE_APP_API_URL
 const method = 'forecast.json'
 
-console.log(apiKey)
-console.log(baseUrl)
-
 type ReducerHook = (state: State, action: Action) => State
 
 export const AppProvider = ({ children }: AppProviderType) => {
@@ -57,16 +53,33 @@ export const AppProvider = ({ children }: AppProviderType) => {
   }
 
   const fetchDataApi = (url: string) => {
-    dispatch({ type: 'START_LOADING'})
+    dispatch({ type: 'START_LOADING' })
     const data = fetch(url)
       .then((request) => request.json())
       .then((response) => {
-        dispatch({ type: 'GET_DATA', payload: response })
+        console.log(response)
+        if (response.error) {
+          dispatch({
+            type: 'SET_ERROR',
+            payload: {
+              show: true,
+              msg: response.error.message,
+            },
+          })
+        } else {
+          dispatch({ type: 'GET_DATA', payload: response })
+        }
         dispatch({ type: 'STOP_LOADING' })
       })
       .catch((err) => {
         console.log(err)
-        dispatch({type: 'SET_ERROR', payload: {show:true, msg: 'Can\'t fetch data, check your internet connection'}})
+        dispatch({
+          type: 'SET_ERROR',
+          payload: {
+            show: true,
+            msg: "Can't fetch data, check your internet connection",
+          },
+        })
         dispatch({ type: 'STOP_LOADING' })
       })
 

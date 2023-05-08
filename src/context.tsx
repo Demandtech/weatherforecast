@@ -33,6 +33,9 @@ const apiKey = import.meta.env.VITE_APP_API_KEY
 const baseUrl = import.meta.env.VITE_APP_API_URL
 const method = 'forecast.json'
 
+console.log(apiKey)
+console.log(baseUrl)
+
 type ReducerHook = (state: State, action: Action) => State
 
 export const AppProvider = ({ children }: AppProviderType) => {

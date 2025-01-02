@@ -1,15 +1,15 @@
-import { MagnifyingGlass } from 'react-loader-spinner'
+import { MagnifyingGlass } from "react-loader-spinner";
 
 const Loader = () => {
   return (
     <MagnifyingGlass
+      color="#5f94ff"
+      glassColor="#ffffff"
+      height="80"
       visible={true}
-      height='80'
-      width='80'
-      glassColor='#ffffff'
-      color='#5f94ff'
+      width="80"
     />
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

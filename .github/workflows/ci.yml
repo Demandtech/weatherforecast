@@ -28,6 +28,35 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - name: Deploy to vercel
-        run: |
-          vercel --prod
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Cache Vercel CLI
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm-global/bin/vercel
+          key: ${{ runner.os }}-vercel-cli-${{ hashFiles('**/package.json') }}
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel
+        run: vercel --prod
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN || '' }}

@@ -10,7 +10,7 @@ const MainComponent = () => {
   if (isLoading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <Loader />
+        <Loader color="#5f94ff" loading={isLoading} />
       </div>
     );
   }

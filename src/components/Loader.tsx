@@ -1,14 +1,8 @@
-import { MagnifyingGlass } from "react-loader-spinner";
+import { BarLoader } from "react-spinners";
 
-const Loader = () => {
+const Loader = ({ loading, color }: { loading: boolean; color: string }) => {
   return (
-    <MagnifyingGlass
-      color="#5f94ff"
-      glassColor="#ffffff"
-      height="80"
-      visible={true}
-      width="80"
-    />
+    <BarLoader color={color} height="4px" width="80px" loading={loading} />
   );
 };
 

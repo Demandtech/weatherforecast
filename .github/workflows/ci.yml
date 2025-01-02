@@ -19,7 +19,15 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm install --force
+        run: npm install
 
       - name: Run Linting
         run: npm run lint
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Deploy to vercel
+        run: |
+          vercel --prod

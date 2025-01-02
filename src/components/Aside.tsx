@@ -64,7 +64,7 @@ const Aside = () => {
             </form>
             {isLoading ? (
               <div className="flex-1 flex items-center justify-center">
-                <Loader />
+                <Loader color="#ffffff" loading={isLoading} />
               </div>
             ) : (
               <div>

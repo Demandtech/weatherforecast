@@ -16,10 +16,10 @@ const DaysElement = ({ displayIndex, setDisplayIndex }: DisplayIndexProps) => {
             }`}
             role="button"
             tabIndex={0}
-            onClick={() => setDisplayIndex(index)}
+            onClick={() => setDisplayIndex?.(index)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
-                setDisplayIndex(index);
+                setDisplayIndex?.(index);
               }
             }}
           >
